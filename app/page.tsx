@@ -122,7 +122,7 @@ export default function Home() {
                 Replacement Parts by <span className="text-[#f87f21]">Equipment Brand</span>
               </h2>
               <p className="text-xs sm:text-sm text-gray-400">
-                Select your tractor or heavy equipment brand to quote genuine or aftermarket parts.
+                Select your heavy equipment brand to quote genuine or aftermarket parts.
               </p>
             </div>
             <Link
@@ -133,20 +133,29 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {allBrands.map((brand) => (
               <button
                 key={brand.code}
                 onClick={() => handleOpenQuote(brand.code)}
                 className="glass-panel glass-panel-hover p-4 rounded-2xl border border-gray-800 flex flex-col items-center justify-center text-center group cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-xl bg-gray-800/80 group-hover:bg-[#f87f21]/20 flex items-center justify-center text-gray-300 group-hover:text-[#f87f21] transition-colors mb-2">
-                  <Wrench className="w-5 h-5" />
+                <div className="w-full h-20 sm:h-24 p-2 flex items-center justify-center group-hover:scale-110 transition-transform mb-1">
+                  {brand.logoUrl ? (
+                    <Image
+                      src={brand.logoUrl}
+                      alt={`${brand.name} logo`}
+                      width={180}
+                      height={100}
+                      className="w-full h-full object-contain filter drop-shadow-md brightness-110"
+                    />
+                  ) : (
+                    <div className="w-full h-full rounded-lg bg-gray-900 flex items-center justify-center text-[#f87f21]">
+                      <Wrench className="w-6 h-6" />
+                    </div>
+                  )}
                 </div>
-                <span className="text-xs font-bold text-white group-hover:text-[#f87f21] transition-colors">
-                  {brand.name}
-                </span>
-                <span className="text-[10px] text-gray-400 mt-0.5 uppercase tracking-wider font-semibold">Quote Part</span>
+                <span className="text-[10px] text-gray-400 mt-1 uppercase tracking-wider font-semibold">Quote Part</span>
               </button>
             ))}
           </div>

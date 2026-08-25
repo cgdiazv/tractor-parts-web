@@ -27,14 +27,14 @@ export default function Footer() {
 
         {/* 4 Column Footer Content matching design */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
-          {/* Col 1: Valle de Sula #2 */}
+          {/* Col 1: San Pedro Sula, HN */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
-              VALLE DE SULA #2
+              SAN PEDRO SULA, HN
             </h3>
             <div className="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
-              <p>27 cll. 19 ave</p>
-              <p>Valle de Sula #2, CR 21101</p>
+              <p>27 cll. 19 ave. SE</p>
+              <p>San Pedro Sula, HN 21101</p>
             </div>
             <div className="pt-1 flex items-center gap-2">
               <svg className="w-4 h-4 text-[#f87f21] shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -62,10 +62,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Orlando */}
+          {/* Col 2: Orlando, FL */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
-              ORLANDO
+              ORLANDO, FL
             </h3>
             <div className="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
               <p>7450 E Irlo Bronson Memorial Hwy, St Cloude</p>

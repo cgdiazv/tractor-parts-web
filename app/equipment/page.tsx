@@ -26,18 +26,19 @@ export default function EquipmentPage() {
     <div className="min-h-screen bg-[#0b0d10] text-[#f3f4f6] flex flex-col font-sans">
       <Navbar />
 
-      <main className="flex-1 py-12 px-4 sm:px-8 max-w-7xl mx-auto space-y-12 w-full">
-        {/* Header */}
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 space-y-4 relative overflow-hidden">
+      <main className="flex-1 pb-12 w-full -mt-[84px]">
+        {/* Full Width Top Header Banner */}
+        <div className="relative w-full pt-[110px] pb-12 sm:pb-16 bg-[#0b0d10] border-b border-gray-800 overflow-hidden mb-10">
           <Image
             src="/header.webp"
             alt="Equipment Header Background"
             fill
             priority
-            className="object-cover object-center opacity-55 pointer-events-none select-none"
+            quality={95}
+            className="object-cover object-top opacity-55 pointer-events-none select-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f14]/85 via-[#0d0f14]/60 to-[#0d0f14]/40 pointer-events-none" />
-          <div className="relative z-10 space-y-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0b0d10]/95 via-[#0b0d10]/80 to-[#0b0d10]/40 pointer-events-none" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
               <Truck className="w-3.5 h-3.5" />
               <span>Inspected Pre-Owned Heavy Equipment</span>
@@ -50,6 +51,8 @@ export default function EquipmentPage() {
             </p>
           </div>
         </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12 w-full">
 
         {/* Filter Bar */}
         <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
@@ -135,6 +138,7 @@ export default function EquipmentPage() {
               </div>
             </div>
           ))}
+        </div>
         </div>
       </main>
 

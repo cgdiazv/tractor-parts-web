@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import PartsRequestModal from "@/app/components/PartsRequestModal";
@@ -50,20 +51,33 @@ export default function PartsRequestPage() {
     <div className="min-h-screen bg-[#0b0d10] text-[#f3f4f6] flex flex-col font-sans">
       <Navbar />
 
-      <main className="flex-1 py-12 px-4 sm:px-8 max-w-7xl mx-auto space-y-12 w-full">
-        {/* Header */}
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
-            <FileText className="w-3.5 h-3.5" />
-            <span>Official Quote Request Form</span>
+      <main className="flex-1 pb-12 w-full -mt-[84px]">
+        {/* Full Width Top Header Banner */}
+        <div className="relative w-full pt-[110px] pb-12 sm:pb-16 bg-[#0b0d10] border-b border-gray-800 overflow-hidden mb-10">
+          <Image
+            src="/header.webp"
+            alt="Parts Request Background"
+            fill
+            priority
+            quality={95}
+            className="object-cover object-top opacity-55 pointer-events-none select-none"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0b0d10]/95 via-[#0b0d10]/80 to-[#0b0d10]/40 pointer-events-none" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
+              <FileText className="w-3.5 h-3.5" />
+              <span>Official Quote Request Form</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
+              Request Replacement Parts by <span className="text-[#f87f21]">Equipment Brand</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
+              Enter your equipment details (Caterpillar, Cummins, Komatsu, Volvo, John Deere, or Case IH) and our technical team will verify the exact part using OEM catalogs.
+            </p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-            Request Replacement Parts by <span className="text-[#f87f21]">Machinery Brand</span>
-          </h1>
-          <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-            Enter your equipment details (Caterpillar, Cummins, Komatsu, Volvo, John Deere, or Case IH) and our technical team will verify the exact part using OEM catalogs.
-          </p>
         </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12 w-full">
 
         {/* Brand Selector Tabs */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -71,14 +85,25 @@ export default function PartsRequestPage() {
             <button
               key={b.code}
               onClick={() => setSelectedBrand(b.code)}
-              className={`p-4 rounded-2xl border text-center transition-all cursor-pointer ${
+              className={`p-3.5 rounded-2xl border flex flex-col items-center justify-center text-center transition-all cursor-pointer ${
                 selectedBrand === b.code
                   ? "bg-[#f87f21] text-white border-[#f87f21] font-bold shadow-lg shadow-[#f87f21]/20 scale-105"
                   : "glass-panel text-gray-300 border-gray-800 hover:border-gray-700"
               }`}
             >
-              <div className="text-sm font-black uppercase">{b.name}</div>
-              <div className="text-[10px] opacity-80 mt-0.5 uppercase tracking-wider font-semibold">Quote Parts</div>
+              <div className="w-full h-16 sm:h-20 p-2 flex items-center justify-center">
+                {b.logoUrl ? (
+                  <Image
+                    src={b.logoUrl}
+                    alt={`${b.name} logo`}
+                    width={160}
+                    height={90}
+                    className="w-full h-full object-contain filter drop-shadow-md brightness-110"
+                  />
+                ) : (
+                  <span className="text-[10px] font-black">{b.code}</span>
+                )}
+              </div>
             </button>
           ))}
         </div>
@@ -152,13 +177,15 @@ export default function PartsRequestPage() {
                 If you prefer support via phone call or email, contact sales directly:
               </p>
               <a
-                href={`tel:${storeInfo.phone.split("/")[0].trim()}`}
-                className="block text-center py-2.5 rounded-xl bg-gray-800 text-white font-bold text-sm hover:bg-gray-700 transition-colors"
+                href="tel:+13466257229"
+                className="block text-center py-3 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#d9650b] text-white font-extrabold text-sm tracking-wider hover:opacity-95 transition-opacity shadow-lg shadow-[#f87f21]/20 flex items-center justify-center gap-2"
               >
-                {storeInfo.phone.split("/")[0].trim()}
+                <PhoneCall className="w-4 h-4" />
+                <span>+1 346.625.7229</span>
               </a>
             </div>
           </div>
+        </div>
         </div>
       </main>
 

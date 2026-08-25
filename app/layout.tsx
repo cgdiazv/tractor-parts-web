@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     "Inframe kits for heavy equipment",
   ],
   icons: {
-    icon: "/logo.webp",
-    apple: "/logo.webp",
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
   openGraph: {
     title: "Tractor Parts Depot | Heavy Equipment Parts Supplier Orlando FL",
