@@ -4,8 +4,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Mail } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function Footer() {
+  const { t, language } = useLanguage();
+
   return (
     <footer className="bg-[#080a0e] text-gray-300 border-t border-gray-800/80 pt-12 pb-8 px-4 sm:px-8 font-sans">
       <div className="max-w-7xl mx-auto space-y-10">
@@ -13,7 +16,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-gray-800/80">
           <Link href="/" className="inline-block group">
             <Image
-              src="/logo.webp"
+              src={language === "es" ? "/logo-es.webp" : "/logo.webp"}
               alt="Tractor Parts Depot Logo"
               width={220}
               height={60}
@@ -21,7 +24,7 @@ export default function Footer() {
             />
           </Link>
           <span className="text-xs font-semibold text-gray-400 max-w-md">
-            Direct Import of Replacement Parts & Heavy Machinery for Construction & Mining.
+            {t.footer.blurb}
           </span>
         </div>
 
@@ -57,7 +60,7 @@ export default function Footer() {
                 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5 hover:text-[#f87f21] transition-colors"
               >
                 <MapPin className="w-3.5 h-3.5 text-white" />
-                <span>GET DIRECTIONS</span>
+                <span>{t.footer.getDirections}</span>
               </a>
             </div>
           </div>
@@ -68,7 +71,7 @@ export default function Footer() {
               ORLANDO, FL
             </h3>
             <div className="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
-              <p>7450 E Irlo Bronson Memorial Hwy, St Cloude</p>
+              <p>7450 E Irlo Bronson Memorial Hwy, St Cloud</p>
               <p>FL 34771</p>
             </div>
             <div className="pt-1 flex items-center gap-2">
@@ -92,7 +95,7 @@ export default function Footer() {
                 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5 hover:text-[#f87f21] transition-colors"
               >
                 <MapPin className="w-3.5 h-3.5 text-white" />
-                <span>GET DIRECTIONS</span>
+                <span>{t.footer.getDirections}</span>
               </a>
             </div>
           </div>
@@ -100,11 +103,11 @@ export default function Footer() {
           {/* Col 3: Hours & Email */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
-              HOURS
+              {t.contact.hoursTitle}
             </h3>
             <div className="text-xs sm:text-sm text-gray-300 space-y-1 font-medium">
-              <p>Mon - Fri &nbsp; 8:00 AM - 5:00 PM</p>
-              <p>Sat - Sun &nbsp; Closed</p>
+              <p>{t.contact.hoursWeekdays}</p>
+              <p>{t.contact.hoursSat}</p>
             </div>
             <div className="pt-3 flex items-center gap-2">
               <Mail className="w-4 h-4 text-[#f87f21] shrink-0" />
@@ -117,57 +120,46 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 4: Quick Links (Separated by vertical line on desktop) */}
+          {/* Col 4: Quick Links */}
           <div className="lg:col-span-3 space-y-3 lg:border-l lg:border-gray-800 lg:pl-8">
             <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
-              QUICK LINKS
+              {t.footer.quickLinks}
             </h3>
             <ul className="space-y-2 text-xs sm:text-sm font-semibold text-gray-300">
               <li>
                 <Link href="/inventory" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Parts Catalog
+                  <span className="text-[#f87f21] font-bold">+</span> {t.nav.partsCatalog}
                 </Link>
               </li>
               <li>
                 <Link href="/equipment" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Heavy Equipment
+                  <span className="text-[#f87f21] font-bold">+</span> {t.nav.heavyEquipment}
                 </Link>
               </li>
               <li>
                 <Link href="/parts-request" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Locations
+                  <span className="text-[#f87f21] font-bold">+</span> {t.nav.requestByBrand}
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Contact Us
+                  <span className="text-[#f87f21] font-bold">+</span> {t.nav.contactUs}
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* SEO Popular Categories & Locations */}
+        {/* SEO Taglines */}
         <div className="pt-6 border-t border-gray-800/60 text-[11px] text-gray-400 space-y-2">
           <p className="font-bold text-gray-300 uppercase tracking-wider">
-            Heavy Equipment Parts Supplier Orlando, FL &amp; USA Exporter to Latin America:
-          </p>
-          <p className="leading-relaxed text-gray-500">
-            Heavy equipment parts Orlando • Construction equipment parts Orlando FL • Mining equipment spare parts Orlando • Heavy machinery parts supplier Florida • Diesel engine parts Orlando • Excavator parts supplier Orlando • Bulldozer parts Florida • Heavy equipment parts USA • Heavy equipment exporter from Orlando • Construction equipment parts supplier USA • Export heavy equipment parts from USA • USA heavy equipment spare parts supplier • Heavy equipment parts for Latin America • CAT parts Orlando • Komatsu spare parts Florida • Cummins engine parts Orlando • Caterpillar aftermarket parts USA • Komatsu excavator parts supplier • Cummins overhaul kits USA • Turbochargers for CAT engines • Komatsu undercarriage parts • Link assy for excavators • Heavy equipment crankshafts • Camshafts for diesel engines • Inframe kits for heavy equipment.
+            {t.footer.tagline}
           </p>
         </div>
 
         {/* Sub-footer */}
         <div className="pt-6 border-t border-gray-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-          <p>© {new Date().getFullYear()} Tractor Parts Depot. All rights reserved.</p>
-          <div className="flex items-center gap-6 font-bold text-[11px] uppercase">
-            <Link href="#" className="hover:text-gray-300 transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:text-gray-300 transition-colors">
-              Terms & Conditions
-            </Link>
-          </div>
+          <p>© {new Date().getFullYear()} Tractor Parts Depot. {t.footer.rights}</p>
         </div>
       </div>
     </footer>

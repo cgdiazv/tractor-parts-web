@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, Send, ShieldCheck, CheckCircle2, AlertCircle, Wrench, PackageCheck } from "lucide-react";
+import { X, Send, ShieldCheck, CheckCircle2, PackageCheck } from "lucide-react";
 import { allBrands } from "@/app/lib/inventory";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 interface Props {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export default function PartsRequestModal({
   initialPartName = "",
   initialSku = "",
 }: Props) {
+  const { t, language } = useLanguage();
   const [brand, setBrand] = useState(initialBrand || "CAT");
   const [partName, setPartName] = useState(initialPartName);
   const [sku, setSku] = useState(initialSku);
@@ -57,13 +59,13 @@ export default function PartsRequestModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn font-sans">
       <div className="relative w-full max-w-2xl bg-[#14171f] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="bg-[#1a1f2c] border-b border-gray-800 p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/logo.webp"
+              src={language === "es" ? "/logo-es.webp" : "/logo.webp"}
               alt="Tractor Parts Depot Logo"
               width={160}
               height={45}
@@ -71,16 +73,16 @@ export default function PartsRequestModal({
             />
             <div className="border-l border-gray-700/80 pl-3">
               <h3 className="text-base font-bold text-white uppercase tracking-tight">
-                Quote Request
+                {t.modal.title}
               </h3>
               <p className="text-[11px] text-gray-400">
-                Direct Technical Assistance
+                {t.modal.subtitle}
               </p>
             </div>
           </div>
           <button
             onClick={resetAndClose}
-            className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+            className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -93,16 +95,16 @@ export default function PartsRequestModal({
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h4 className="text-2xl font-black text-white">Request Sent Successfully!</h4>
+              <h4 className="text-2xl font-black text-white">{t.modal.successTitle}</h4>
               <p className="text-sm text-gray-300 max-w-md mx-auto">
-                We have received your inquiry for part <span className="text-[#f87f21] font-bold">{partName || "requested"}</span>. Our technical team will contact you shortly with availability and pricing.
+                {t.modal.successDesc}
               </p>
               <div className="pt-4">
                 <button
                   onClick={resetAndClose}
-                  className="px-6 py-2.5 rounded-xl bg-[#f87f21] text-white font-bold text-sm hover:bg-[#df680d] transition-colors"
+                  className="px-6 py-2.5 rounded-xl bg-[#f87f21] text-white font-bold text-sm hover:bg-[#df680d] transition-colors cursor-pointer"
                 >
-                  Close Window
+                  {t.modal.close}
                 </button>
               </div>
             </div>
@@ -111,7 +113,7 @@ export default function PartsRequestModal({
               {/* Brand Selector */}
               <div>
                 <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-                  Machinery / Part Brand *
+                  {t.modal.brand}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {allBrands.map((b) => (
@@ -119,7 +121,7 @@ export default function PartsRequestModal({
                       key={b.code}
                       type="button"
                       onClick={() => setBrand(b.code)}
-                      className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
+                      className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                         brand === b.code
                           ? "bg-[#f87f21] text-white border-[#f87f21] shadow-md shadow-[#f87f21]/20"
                           : "bg-[#1c212d] text-gray-300 border-gray-800 hover:border-gray-700"
@@ -135,7 +137,7 @@ export default function PartsRequestModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Part Name or Description *
+                    {t.modal.partName}
                   </label>
                   <input
                     type="text"
@@ -148,7 +150,7 @@ export default function PartsRequestModal({
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Part Number / SKU (If known)
+                    {t.modal.sku}
                   </label>
                   <input
                     type="text"
@@ -164,7 +166,7 @@ export default function PartsRequestModal({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Machine Model
+                    {t.modal.machineModel}
                   </label>
                   <input
                     type="text"
@@ -176,7 +178,7 @@ export default function PartsRequestModal({
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Chassis / Engine Serial No.
+                    {t.modal.serialNumber}
                   </label>
                   <input
                     type="text"
@@ -188,7 +190,7 @@ export default function PartsRequestModal({
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Quantity Required
+                    {t.modal.quantity}
                   </label>
                   <input
                     type="number"
@@ -204,12 +206,12 @@ export default function PartsRequestModal({
               <div className="border-t border-gray-800/80 pt-4 space-y-4">
                 <h4 className="text-xs font-bold text-[#f87f21] uppercase tracking-wider flex items-center gap-1.5">
                   <PackageCheck className="w-4 h-4" />
-                  Customer Contact Information
+                  Contact Details
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 mb-1">Full Name / Company *</label>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">{t.modal.name}</label>
                     <input
                       type="text"
                       required
@@ -220,18 +222,18 @@ export default function PartsRequestModal({
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 mb-1">Phone / WhatsApp *</label>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">{t.modal.phone}</label>
                     <input
                       type="tel"
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+504 9900-0000"
+                      placeholder="+1 346.625.7229"
                       className="w-full px-3 py-2 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 mb-1">Email Address *</label>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">{t.modal.email}</label>
                     <input
                       type="email"
                       required
@@ -244,7 +246,7 @@ export default function PartsRequestModal({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-300 mb-1">Additional Notes</label>
+                  <label className="block text-xs font-semibold text-gray-300 mb-1">{t.modal.notes}</label>
                   <textarea
                     rows={2}
                     value={notes}
@@ -264,14 +266,14 @@ export default function PartsRequestModal({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#d9650b] text-white font-bold text-sm shadow-lg shadow-[#f87f21]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#d9650b] text-white font-bold text-sm shadow-lg shadow-[#f87f21]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (
-                    <span>Processing...</span>
+                    <span>{t.modal.submitting}</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Submit Quote Request</span>
+                      <span>{t.modal.submit}</span>
                     </>
                   )}
                 </button>

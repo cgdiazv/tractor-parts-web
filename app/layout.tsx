@@ -56,6 +56,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { LanguageProvider } from "@/app/context/LanguageContext";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -63,7 +65,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[#0b0d10] text-[#f3f4f6]" suppressHydrationWarning>{children}</body>
+      <body className="min-h-full flex flex-col bg-[#0b0d10] text-[#f3f4f6]" suppressHydrationWarning>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

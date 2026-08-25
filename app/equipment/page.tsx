@@ -6,9 +6,11 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import PartsRequestModal from "@/app/components/PartsRequestModal";
 import { heavyEquipmentListings, EquipmentItem } from "@/app/lib/inventory";
-import { Truck, ShieldCheck, MapPin, Clock, ArrowRight, CheckCircle2, SlidersHorizontal } from "lucide-react";
+import { Truck, MapPin, Clock, ArrowRight, SlidersHorizontal } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function EquipmentPage() {
+  const { t, translateCondition, translateSpecLabel } = useLanguage();
   const [selectedBrandFilter, setSelectedBrandFilter] = useState("All");
   const [modalOpen, setModalOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<EquipmentItem | null>(null);
@@ -41,13 +43,13 @@ export default function EquipmentPage() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
               <Truck className="w-3.5 h-3.5" />
-              <span>Inspected Pre-Owned Heavy Equipment</span>
+              <span>{t.equipment.badge}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-              Wheel Loaders, Excavators & <span className="text-[#f87f21]">Tractors</span>
+              {t.equipment.titlePrefix} <span className="text-[#f87f21]">{t.equipment.titleHighlight}</span>
             </h1>
             <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-              Work-ready equipment for mining, construction, and earthmoving. All machinery has been technically inspected by our specialists at our depot.
+              {t.equipment.desc}
             </p>
           </div>
         </div>
@@ -56,20 +58,20 @@ export default function EquipmentPage() {
 
         {/* Filter Bar */}
         <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
-          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#f87f21]" /> Brand:
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1 shrink-0">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-[#f87f21]" /> {t.equipment.brandFilter}
           </span>
           {["All", "CAT", "Volvo", "Atlas Copco"].map((b) => (
             <button
               key={b}
               onClick={() => setSelectedBrandFilter(b)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 selectedBrandFilter === b
                   ? "bg-[#f87f21] text-white border-[#f87f21]"
                   : "glass-panel text-gray-300 border-gray-800 hover:border-gray-700"
               }`}
             >
-              {b === "All" ? "All Equipment" : b}
+              {b === "All" ? t.equipment.allEquipment : b}
             </button>
           ))}
         </div>
@@ -97,7 +99,7 @@ export default function EquipmentPage() {
                       <Clock className="w-3.5 h-3.5 text-[#f87f21]" /> {item.hours}
                     </span>
                     <span className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#f87f21]" /> {item.location.split("/")[0]}
+                      <MapPin className="w-3.5 h-3.5 text-[#f87f21]" /> San Pedro Sula / Orlando
                     </span>
                   </div>
                 </div>
@@ -109,12 +111,14 @@ export default function EquipmentPage() {
                   {/* Specifications Table */}
                   <div className="border-t border-gray-800 pt-4 space-y-2">
                     <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                      Technical Specifications:
+                      {t.equipment.specs}
                     </h3>
                     <div className="grid grid-cols-2 gap-2 text-xs">
                       {Object.entries(item.specs).map(([key, val]) => (
                         <div key={key} className="p-2.5 rounded-xl bg-[#12151f] border border-gray-800/80">
-                          <span className="text-[10px] text-gray-500 block uppercase font-bold">{key}</span>
+                          <span className="text-[10px] text-gray-500 block uppercase font-bold">
+                            {translateSpecLabel(key)}
+                          </span>
                           <span className="font-bold text-gray-200">{val}</span>
                         </div>
                       ))}
@@ -125,14 +129,14 @@ export default function EquipmentPage() {
 
               <div className="p-6 border-t border-gray-800 flex items-center justify-between bg-[#12151f]/50">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500 block">Estimated Price</span>
-                  <span className="text-base font-black text-[#f87f21]">{item.price}</span>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 block">{t.equipment.condition}</span>
+                  <span className="text-base font-black text-[#f87f21]">{translateCondition(item.price)}</span>
                 </div>
                 <button
                   onClick={() => handleInquire(item)}
-                  className="px-5 py-2.5 rounded-xl bg-[#f87f21] text-white text-xs font-bold hover:bg-[#df680d] transition-colors flex items-center gap-2 shadow-lg shadow-[#f87f21]/20"
+                  className="px-5 py-2.5 rounded-xl bg-[#f87f21] text-white text-xs font-bold hover:bg-[#df680d] transition-colors flex items-center gap-2 shadow-lg shadow-[#f87f21]/20 cursor-pointer"
                 >
-                  <span>Inquire Details</span>
+                  <span>{t.equipment.requestInfo}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

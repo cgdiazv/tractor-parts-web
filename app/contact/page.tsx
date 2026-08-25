@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import { Mail, PhoneCall, MapPin, Clock, Send, CheckCircle2, AlertCircle, MessageSquare } from "lucide-react";
+import { Mail, MapPin, Clock, Send, CheckCircle2, AlertCircle, MessageSquare } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function ContactPage() {
+  const { t, language } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,7 +50,7 @@ export default function ContactPage() {
       }
 
       setSuccessMessage(
-        data.message || "Your message has been sent successfully to info@tractorpartsdepot.us!"
+        data.message || (language === "es" ? "¡Su mensaje ha sido enviado con éxito a info@tractorpartsdepot.us!" : "Your message has been sent successfully to info@tractorpartsdepot.us!")
       );
       setFormData({
         name: "",
@@ -85,13 +88,13 @@ export default function ContactPage() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
               <Mail className="w-3.5 h-3.5" />
-              <span>Contact Sales &amp; Technical Support</span>
+              <span>{t.contact.badge}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-              Contact <span className="text-[#f87f21]">Tractor Parts Depot</span>
+              {t.contact.titlePrefix} <span className="text-[#f87f21]">{t.contact.titleHighlight}</span>
             </h1>
             <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-              Have questions about diesel engine components, undercarriage parts, or heavy equipment export? Our technical sales team in Orlando, FL and San Pedro Sula, HN is ready to assist you.
+              {t.contact.desc}
             </p>
           </div>
         </div>
@@ -103,10 +106,12 @@ export default function ContactPage() {
               <div className="border-b border-gray-800 pb-4">
                 <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-[#f87f21]" />
-                  <span>Send Us a Message</span>
+                  <span>{t.contact.formTitle}</span>
                 </h2>
                 <p className="text-xs text-gray-400 mt-1">
-                  Fill out the form below. Your request will be transmitted directly to our sales department.
+                  {language === "es"
+                    ? "Complete el formulario a continuación. Su solicitud será transmitida directamente a nuestro departamento de ventas."
+                    : "Fill out the form below. Your request will be transmitted directly to our sales department."}
                 </p>
               </div>
 
@@ -128,7 +133,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Full Name *
+                      {t.contact.name} *
                     </label>
                     <input
                       type="text"
@@ -143,7 +148,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Email Address *
+                      {t.contact.email} *
                     </label>
                     <input
                       type="email"
@@ -160,7 +165,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Phone / WhatsApp
+                      {t.contact.phone}
                     </label>
                     <input
                       type="text"
@@ -174,7 +179,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Company / Organization
+                      {t.contact.company}
                     </label>
                     <input
                       type="text"
@@ -190,7 +195,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Inquiry Category
+                      {t.contact.category}
                     </label>
                     <select
                       name="category"
@@ -198,19 +203,17 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-full px-4 py-2.5 rounded-xl bg-[#0b0d10] border border-gray-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#f87f21]"
                     >
-                      <option value="General Parts Inquiry">General Parts Inquiry</option>
-                      <option value="Caterpillar Parts">Caterpillar Parts</option>
-                      <option value="Komatsu Parts">Komatsu Parts</option>
-                      <option value="Cummins Engine Overhaul Kits">Cummins Engine Overhaul Kits</option>
-                      <option value="Volvo & Undercarriage Parts">Volvo &amp; Undercarriage Parts</option>
-                      <option value="Heavy Machinery Sales">Heavy Machinery Sales</option>
-                      <option value="Export & Latin America Shipping">Export &amp; Latin America Shipping</option>
+                      <option value="General Parts Inquiry">{t.contact.catGeneral}</option>
+                      <option value="Diesel Engine Components">{t.contact.catEngine}</option>
+                      <option value="Undercarriage & Track Parts">{t.contact.catUndercarriage}</option>
+                      <option value="Heavy Machinery & Export Quote">{t.contact.catExport}</option>
+                      <option value="Hydraulics & Seals">{t.contact.catHydraulics}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Subject
+                      {t.contact.subject}
                     </label>
                     <input
                       type="text"
@@ -225,7 +228,7 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-xs font-semibold text-gray-300 mb-1">
-                    Message / Equipment Details *
+                    {t.contact.message} *
                   </label>
                   <textarea
                     name="message"
@@ -233,7 +236,11 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Provide part numbers, machine serial numbers, engine model, or details regarding your quote requirement..."
+                    placeholder={
+                      language === "es"
+                        ? "Proporcione números de parte, números de serie de máquina, modelo de motor o detalles de su cotización..."
+                        : "Provide part numbers, machine serial numbers, engine model, or details regarding your quote requirement..."
+                    }
                     className="w-full px-4 py-2.5 rounded-xl bg-[#0b0d10] border border-gray-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#f87f21] leading-relaxed"
                   />
                 </div>
@@ -241,14 +248,14 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#d9650b] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#f87f21]/20 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
+                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#d9650b] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#f87f21]/20 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
-                    <span>Sending Message...</span>
+                    <span>{t.contact.submitting}</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Send Message to Sales</span>
+                      <span>{t.contact.submit}</span>
                     </>
                   )}
                 </button>
@@ -305,16 +312,17 @@ export default function ContactPage() {
               <div className="glass-panel p-6 rounded-3xl border border-gray-800 space-y-3">
                 <div className="flex items-center gap-2 text-white font-black uppercase text-xs tracking-wider">
                   <Clock className="w-4 h-4 text-[#f87f21]" />
-                  <span>DEPOT OPERATING HOURS</span>
+                  <span>{t.contact.hoursTitle}</span>
                 </div>
                 <div className="text-xs text-gray-300 space-y-1 font-medium">
                   <div className="flex justify-between">
-                    <span>Monday - Friday:</span>
-                    <span className="font-bold text-white">8:00 AM - 5:00 PM</span>
+                    <span>{t.contact.hoursWeekdays}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Saturday - Sunday:</span>
-                    <span className="text-gray-400">Closed</span>
+                    <span>{t.contact.hoursSat}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>{t.contact.hoursSun}</span>
                   </div>
                 </div>
               </div>

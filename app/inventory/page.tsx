@@ -5,9 +5,12 @@ import Image from "next/image";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import InventorySection from "@/app/components/InventorySection";
-import { Wrench, ShieldCheck } from "lucide-react";
+import { Wrench } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function InventoryPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-[#0b0d10] text-[#f3f4f6] flex flex-col font-sans">
       <Navbar />
@@ -27,13 +30,13 @@ export default function InventoryPage() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
               <Wrench className="w-3.5 h-3.5" />
-              <span>Full Catalog • Tractor Parts Depot</span>
+              <span>{t.inventory.headerBadge}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-              Inventory of <span className="text-[#f87f21]">Diesel Engine & Undercarriage Parts</span>
+              {t.inventory.headerTitlePrefix} <span className="text-[#f87f21]">{t.inventory.headerTitleHighlight}</span>
             </h1>
             <p className="text-xs sm:text-sm text-gray-300 max-w-4xl leading-relaxed">
-              Browse our USA heavy equipment spare parts inventory: CAT parts Orlando, Komatsu undercarriage parts, link assy for excavators, Cummins overhaul kits USA, turbochargers, heavy equipment crankshafts, camshafts for diesel engines, and inframe kits. Shipped directly from Orlando, FL for export to Latin America &amp; worldwide.
+              {t.inventory.headerDesc}
             </p>
           </div>
         </div>
