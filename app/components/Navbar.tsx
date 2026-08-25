@@ -78,6 +78,9 @@ export default function Navbar() {
             <Link href="/parts-request" className="hover:text-[#f87f21] transition-colors py-2">
               Request by Brand
             </Link>
+            <Link href="/contact" className="hover:text-[#f87f21] transition-colors py-2">
+              Contact Us
+            </Link>
           </nav>
 
           {/* CTA & Search Buttons */}
@@ -198,6 +201,14 @@ export default function Navbar() {
               className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-800/60 transition-colors"
             >
               <span>Request by Brand</span>
+              <ChevronRight className="w-4 h-4 text-[#f87f21]" />
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-800/60 transition-colors"
+            >
+              <span>Contact Us</span>
               <ChevronRight className="w-4 h-4 text-[#f87f21]" />
             </Link>
           </nav>
