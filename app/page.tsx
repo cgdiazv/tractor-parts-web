@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Wrench,
-  Search,
   ShieldCheck,
   Truck,
   PhoneCall,
@@ -25,16 +24,8 @@ import PartsRequestModal from "@/app/components/PartsRequestModal";
 import { heavyEquipmentListings, allBrands, storeInfo } from "@/app/lib/inventory";
 
 export default function Home() {
-  const [heroSearch, setHeroSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("");
-
-  const handleHeroSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (heroSearch.trim()) {
-      window.location.href = `/inventory?search=${encodeURIComponent(heroSearch.trim())}`;
-    }
-  };
 
   const handleOpenQuote = (brand = "") => {
     setSelectedBrand(brand);
@@ -45,63 +36,56 @@ export default function Home() {
     <div className="min-h-screen bg-[#0b0d10] text-[#f3f4f6] flex flex-col font-sans">
       <Navbar />
 
-      <main className="flex-1 space-y-16 sm:space-y-24">
-        {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-12 pb-20 px-4 sm:px-8 border-b border-gray-800/80">
-          {/* Background Ambient Glows */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#f87f21]/15 rounded-full blur-[140px] pointer-events-none" />
-          <div className="absolute bottom-0 right-10 w-[400px] h-[300px] bg-amber-600/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Top Hero Container (Background extends up behind Navbar) */}
+      <div className="relative overflow-hidden border-b border-gray-800/80 -mt-[84px] pt-[84px]">
+        {/* Background Hero Image extending to top */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/header.webp"
+            alt="Tractor & Heavy Machinery Hero Background"
+            fill
+            priority
+            quality={95}
+            className="object-cover object-top opacity-75 pointer-events-none select-none"
+          />
+          {/* Subtle overlay gradient to keep text readable while keeping image vibrant */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-[#0b0d10]/40 to-[#0b0d10] pointer-events-none" />
+        </div>
 
-          <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+        {/* Background Ambient Glows */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#f87f21]/20 rounded-full blur-[140px] pointer-events-none z-0" />
+        <div className="absolute bottom-0 right-10 w-[400px] h-[300px] bg-amber-600/15 rounded-full blur-[120px] pointer-events-none z-0" />
+
+        {/* HERO SECTION */}
+        <section className="relative z-10 pt-12 pb-24 sm:pt-20 sm:pb-32 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+          <div className="max-w-3xl text-left space-y-8">
             {/* Main Hero Copy */}
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
-                <span>Direct Import & Technical Support</span>
+                <span>Orlando, FL & USA Heavy Equipment Exporter</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.1]">
-                Replacement Parts for <br className="hidden sm:inline" />
-                <span className="industrial-gradient-text">Tractors & Heavy Machinery</span>
+                Heavy Machinery & <br className="hidden sm:inline" />
+                <span className="industrial-gradient-text">Construction Equipment Parts Supplier</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                We are a company with over 20 years of experience in the market, dedicated to the sale, repair, and service of construction and mining machinery. We value the opportunity to create a long-term relationship with our customers, and we do that by giving you the best customer service available.
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
+                Premier heavy machinery parts supplier in Florida with over 20 years of experience. We export genuine &amp; Caterpillar aftermarket parts, Komatsu spare parts, and Cummins engine parts from Orlando, USA to Latin America and worldwide. From excavator parts, bulldozer undercarriage components, and link assy for excavators to turbochargers for CAT engines, heavy equipment crankshafts, and inframe kits — we keep your fleet operating at peak performance.
               </p>
 
-              {/* Live Search Bar */}
-              <form onSubmit={handleHeroSearch} className="max-w-xl mx-auto relative">
-                <div className="glass-panel p-2 rounded-2xl border border-gray-700 flex items-center gap-2 shadow-2xl">
-                  <div className="pl-3 text-gray-400">
-                    <Search className="w-5 h-5" />
-                  </div>
-                  <input
-                    type="text"
-                    value={heroSearch}
-                    onChange={(e) => setHeroSearch(e.target.value)}
-                    placeholder="Search part (e.g. Fuel Injector, Final Drive, CAT 349D)..."
-                    className="w-full py-2 bg-transparent text-white text-sm focus:outline-none placeholder-gray-500"
-                  />
-                  <button
-                    type="submit"
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#df680d] text-white font-bold text-xs uppercase tracking-wider shrink-0 hover:scale-[1.02] transition-transform"
-                  >
-                    Search
-                  </button>
-                </div>
-              </form>
-
               {/* CTAs */}
-              <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full">
                 <Link
                   href="/inventory"
-                  className="px-6 py-3.5 rounded-xl bg-[#f87f21] text-white font-bold text-sm shadow-lg shadow-[#f87f21]/25 hover:bg-[#df680d] hover:scale-[1.02] transition-all flex items-center gap-2 uppercase tracking-wider text-xs"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#f87f21] text-white font-bold text-sm shadow-lg shadow-[#f87f21]/25 hover:bg-[#df680d] hover:scale-[1.02] transition-all flex items-center justify-center gap-2 uppercase tracking-wider text-xs"
                 >
                   <Package className="w-4 h-4" />
-                  <span>View Catalog (170+ Parts)</span>
+                  <span>View Parts Catalog (170+)</span>
                 </Link>
                 <button
                   onClick={() => handleOpenQuote()}
-                  className="px-6 py-3.5 rounded-xl bg-[#181c26] border border-gray-700 text-gray-200 hover:text-white hover:border-[#f87f21] font-bold text-xs transition-all flex items-center gap-2 uppercase tracking-wider"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#181c26] border border-gray-700 text-gray-200 hover:text-white hover:border-[#f87f21] font-bold text-xs transition-all flex items-center justify-center gap-2 uppercase tracking-wider"
                 >
                   <ShieldCheck className="w-4 h-4 text-[#f87f21]" />
                   <span>Request Quote</span>
@@ -109,7 +93,7 @@ export default function Home() {
               </div>
 
               {/* Metrics Counter */}
-              <div className="pt-6 border-t border-gray-800/80 grid grid-cols-3 gap-4 max-w-lg mx-auto text-center">
+              <div className="pt-6 border-t border-gray-800/80 grid grid-cols-3 gap-6 max-w-md text-left">
                 <div>
                   <span className="text-2xl sm:text-3xl font-black text-white block">170+</span>
                   <span className="text-xs text-gray-400 uppercase font-semibold">Parts in Stock</span>
@@ -119,13 +103,16 @@ export default function Home() {
                   <span className="text-xs text-gray-400 uppercase font-semibold">OEM Brands</span>
                 </div>
                 <div>
-                  <span className="text-2xl sm:text-3xl font-black text-white block">100%</span>
-                  <span className="text-xs text-gray-400 uppercase font-semibold">Guaranteed</span>
+                  <span className="text-2xl sm:text-3xl font-black text-white block">USA & FL</span>
+                  <span className="text-xs text-gray-400 uppercase font-semibold">Direct Exporter</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
+      </div>
+
+      <main className="flex-1 space-y-16 sm:space-y-24 pt-12 sm:pt-20">
 
         {/* BRANDS GRID */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
@@ -246,7 +233,7 @@ export default function Home() {
               Why Choose <span className="text-[#f87f21]">Tractor Parts Depot</span>?
             </h2>
             <p className="text-sm text-gray-400">
-              Your reliable partner for keeping your heavy machinery fleet running at peak performance.
+              Trusted USA heavy equipment spare parts supplier exporting top-brand components from Orlando, Florida to mining &amp; construction sites across USA and Latin America.
             </p>
           </div>
 
@@ -255,9 +242,9 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-[#f87f21]/20 text-[#f87f21] flex items-center justify-center">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">Guaranteed Quality</h3>
+              <h3 className="text-lg font-bold text-white">CAT &amp; Komatsu Parts</h3>
               <p className="text-xs text-gray-400 leading-relaxed">
-                Top-tier OEM and aftermarket parts tested for demanding construction and mining applications.
+                Premium CAT parts Orlando, Caterpillar aftermarket parts USA, Komatsu excavator parts, and Komatsu undercarriage parts tested for severe duty.
               </p>
             </div>
 
@@ -265,9 +252,9 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-[#f87f21]/20 text-[#f87f21] flex items-center justify-center">
                 <Truck className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">Fast Shipping</h3>
+              <h3 className="text-lg font-bold text-white">Orlando &amp; USA Export</h3>
               <p className="text-xs text-gray-400 leading-relaxed">
-                Immediate local delivery at Valle de Sula #2 and fast regional & international shipping.
+                Direct export of heavy equipment parts from USA to Latin America and global destinations with fast air &amp; sea freight dispatch from Florida.
               </p>
             </div>
 
@@ -275,9 +262,9 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-[#f87f21]/20 text-[#f87f21] flex items-center justify-center">
                 <Wrench className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">Technical Assistance</h3>
+              <h3 className="text-lg font-bold text-white">Engine Overhaul Kits</h3>
               <p className="text-xs text-gray-400 leading-relaxed">
-                We help you verify exact part numbers and compatibility using your machine&apos;s serial number.
+                Complete Cummins overhaul kits USA, inframe kits, heavy equipment crankshafts, camshafts for diesel engines, and turbochargers for CAT engines.
               </p>
             </div>
 
@@ -285,9 +272,9 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-[#f87f21]/20 text-[#f87f21] flex items-center justify-center">
                 <PhoneCall className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">Personalized Support</h3>
+              <h3 className="text-lg font-bold text-white">Dedicated Support</h3>
               <p className="text-xs text-gray-400 leading-relaxed">
-                Immediate response via phone or email for urgent quotes on diesel engine and undercarriage parts.
+                Immediate response from technical specialists in diesel engine parts Orlando and link assy for excavators to confirm exact serial compatibility.
               </p>
             </div>
           </div>
@@ -298,13 +285,13 @@ export default function Home() {
           <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-[#f87f21]/40 bg-gradient-to-r from-[#181c26] via-[#141720] to-[#1f1712] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
             <div className="space-y-3 max-w-2xl text-center md:text-left">
               <span className="text-xs font-black uppercase text-[#f87f21] tracking-wider">
-                Can&apos;t find the exact part number?
+                Heavy Equipment Exporter from Orlando, FL
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-white uppercase">
-                We import any machinery part on demand
+                Exporting Construction &amp; Mining Spare Parts Worldwide
               </h2>
               <p className="text-xs sm:text-sm text-gray-300">
-                Send us the details of your Caterpillar, Komatsu, Volvo, Cummins, John Deere, or Case IH machine for a no-obligation import quote.
+                Need Caterpillar aftermarket parts, Komatsu spare parts Florida, Cummins engine parts Orlando, or link assy for excavators? We supply and export any heavy machinery part on demand.
               </p>
             </div>
 
@@ -312,7 +299,7 @@ export default function Home() {
               onClick={() => handleOpenQuote()}
               className="px-8 py-4 rounded-xl bg-[#f87f21] text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-[#f87f21]/30 hover:bg-[#df680d] hover:scale-105 transition-all shrink-0"
             >
-              Speak with an Advisor
+              Request Export Quote
             </button>
           </div>
         </section>

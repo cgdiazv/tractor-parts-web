@@ -125,17 +125,17 @@ export default function Footer() {
             <ul className="space-y-2 text-xs sm:text-sm font-semibold text-gray-300">
               <li>
                 <Link href="/inventory" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Inventory
-                </Link>
-              </li>
-              <li>
-                <Link href="/parts-request" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Parts Department
+                  <span className="text-[#f87f21] font-bold">+</span> Parts Catalog
                 </Link>
               </li>
               <li>
                 <Link href="/equipment" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#f87f21] font-bold">+</span> Services
+                  <span className="text-[#f87f21] font-bold">+</span> Heavy Equipment
+                </Link>
+              </li>
+              <li>
+                <Link href="/parts-request" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#f87f21] font-bold">+</span> Locations
                 </Link>
               </li>
               <li>
@@ -145,6 +145,16 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* SEO Popular Categories & Locations */}
+        <div className="pt-6 border-t border-gray-800/60 text-[11px] text-gray-400 space-y-2">
+          <p className="font-bold text-gray-300 uppercase tracking-wider">
+            Heavy Equipment Parts Supplier Orlando, FL &amp; USA Exporter to Latin America:
+          </p>
+          <p className="leading-relaxed text-gray-500">
+            Heavy equipment parts Orlando • Construction equipment parts Orlando FL • Mining equipment spare parts Orlando • Heavy machinery parts supplier Florida • Diesel engine parts Orlando • Excavator parts supplier Orlando • Bulldozer parts Florida • Heavy equipment parts USA • Heavy equipment exporter from Orlando • Construction equipment parts supplier USA • Export heavy equipment parts from USA • USA heavy equipment spare parts supplier • Heavy equipment parts for Latin America • CAT parts Orlando • Komatsu spare parts Florida • Cummins engine parts Orlando • Caterpillar aftermarket parts USA • Komatsu excavator parts supplier • Cummins overhaul kits USA • Turbochargers for CAT engines • Komatsu undercarriage parts • Link assy for excavators • Heavy equipment crankshafts • Camshafts for diesel engines • Inframe kits for heavy equipment.
+          </p>
         </div>
 
         {/* Sub-footer */}

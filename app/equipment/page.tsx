@@ -28,17 +28,27 @@ export default function EquipmentPage() {
 
       <main className="flex-1 py-12 px-4 sm:px-8 max-w-7xl mx-auto space-y-12 w-full">
         {/* Header */}
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
-            <Truck className="w-3.5 h-3.5" />
-            <span>Inspected Pre-Owned Heavy Equipment</span>
+        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 space-y-4 relative overflow-hidden">
+          <Image
+            src="/header.webp"
+            alt="Equipment Header Background"
+            fill
+            priority
+            className="object-cover object-center opacity-55 pointer-events-none select-none"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f14]/85 via-[#0d0f14]/60 to-[#0d0f14]/40 pointer-events-none" />
+          <div className="relative z-10 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
+              <Truck className="w-3.5 h-3.5" />
+              <span>Inspected Pre-Owned Heavy Equipment</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
+              Wheel Loaders, Excavators & <span className="text-[#f87f21]">Tractors</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
+              Work-ready equipment for mining, construction, and earthmoving. All machinery has been technically inspected by our specialists at our depot.
+            </p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-            Wheel Loaders, Excavators & <span className="text-[#f87f21]">Tractors</span>
-          </h1>
-          <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-            Work-ready equipment for mining, construction, and earthmoving. All machinery has been technically inspected by our specialists at our depot.
-          </p>
         </div>
 
         {/* Filter Bar */}
