@@ -189,7 +189,7 @@ export default function Home() {
                 <div>
                   <div className="relative h-48 w-full bg-black">
                     <Image
-                      src={item.imageUrl || "/cloned-site/images/2025-Volvo-show-wheel-loader-l350h-update-t4f.jpg"}
+                      src={item.imageUrl || "/equipment/volvo-l350h.webp"}
                       alt={item.title}
                       fill
                       className="object-cover"
