@@ -8,6 +8,7 @@ export interface PartItem {
   category?: string;
   condition?: string;
   compatibility?: string[];
+  imageUrl?: string;
 }
 
 export interface EquipmentItem {
@@ -171,13 +172,22 @@ export const heavyEquipmentListings: EquipmentItem[] = [
   },
 ];
 
+export function isBrandMatch(itemBrand: string, targetBrand: string): boolean {
+  if (!targetBrand || targetBrand === "All") return true;
+  const b1 = (itemBrand || "").toLowerCase();
+  const b2 = (targetBrand || "").toLowerCase();
+  if (b1 === b2) return true;
+  if ((b1 === "cat" || b1.includes("caterpillar")) && (b2 === "cat" || b2.includes("caterpillar"))) return true;
+  return false;
+}
+
 export const allBrands = [
-  { name: "Caterpillar", code: "CAT", logoText: "CAT", logoUrl: "/brands/tractorepuestoshn-parts-brand-cat.png", count: partsInventory.filter((p) => p.brand === "CAT").length },
-  { name: "Komatsu", code: "Komatsu", logoText: "KOMATSU", logoUrl: "/brands/tractorepuestoshn-parts-brand-komatsu.png", count: partsInventory.filter((p) => p.brand === "Komatsu").length },
-  { name: "Volvo", code: "Volvo", logoText: "VOLVO", logoUrl: "/brands/tractorepuestoshn-parts-brand-Volvo.png", count: partsInventory.filter((p) => p.brand === "Volvo").length },
-  { name: "Cummins", code: "Cummins", logoText: "CUMMINS", logoUrl: "/brands/tractorepuestoshn-parts-brand-cummins.png", count: partsInventory.filter((p) => p.brand === "Cummins").length },
-  { name: "John Deere", code: "John Deere", logoText: "JOHN DEERE", logoUrl: "/brands/tractorepuestoshn-parts-brand-john-deere.png", count: 12 },
-  { name: "Case IH", code: "Case IH", logoText: "CASE IH", logoUrl: "/brands/tractorepuestoshn-parts-brand-case-ih.png", count: 8 },
+  { name: "Caterpillar", code: "Caterpillar", logoText: "CAT", logoUrl: "/brands/tractorepuestoshn-parts-brand-cat.png", count: partsInventory.filter((p) => isBrandMatch(p.brand, "Caterpillar")).length },
+  { name: "Komatsu", code: "Komatsu", logoText: "KOMATSU", logoUrl: "/brands/tractorepuestoshn-parts-brand-komatsu.png", count: partsInventory.filter((p) => isBrandMatch(p.brand, "Komatsu")).length },
+  { name: "Volvo", code: "Volvo", logoText: "VOLVO", logoUrl: "/brands/tractorepuestoshn-parts-brand-Volvo.png", count: partsInventory.filter((p) => isBrandMatch(p.brand, "Volvo")).length },
+  { name: "Cummins", code: "Cummins", logoText: "CUMMINS", logoUrl: "/brands/tractorepuestoshn-parts-brand-cummins.png", count: partsInventory.filter((p) => isBrandMatch(p.brand, "Cummins")).length },
+  { name: "John Deere", code: "John Deere", logoText: "JOHN DEERE", logoUrl: "/brands/tractorepuestoshn-parts-brand-john-deere.png", count: partsInventory.filter((p) => isBrandMatch(p.brand, "John Deere")).length },
+  { name: "Case IH", code: "Case IH", logoText: "CASE IH", logoUrl: "/brands/tractorepuestoshn-parts-brand-case-ih.png", count: partsInventory.filter((p) => isBrandMatch(p.brand, "Case IH")).length },
 ];
 
 export const storeInfo = {

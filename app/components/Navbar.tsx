@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, PhoneCall, Menu, X, ChevronRight } from "lucide-react";
 import PartsRequestModal from "./PartsRequestModal";
+import { partsInventory } from "@/app/lib/inventory";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,6 +14,19 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const [catalogCount, setCatalogCount] = useState<number>(partsInventory.length);
+
+  useEffect(() => {
+    // Fetch live Prado Commerce inventory count if available
+    fetch("/api/prado/products")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && Array.isArray(data.parts) && data.parts.length > 0) {
+          setCatalogCount(data.parts.length);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +83,7 @@ export default function Navbar() {
             <Link href="/inventory" className="hover:text-[#f87f21] transition-colors py-2 flex items-center gap-1.5">
               Parts Catalog
               <span className="bg-[#f87f21]/20 text-[#f87f21] text-[10px] px-1.5 py-0.5 rounded font-mono font-bold lowercase">
-                170+
+                {catalogCount}+
               </span>
             </Link>
             <Link href="/equipment" className="hover:text-[#f87f21] transition-colors py-2">

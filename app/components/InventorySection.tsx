@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import { Search, Filter, Wrench, ShieldCheck, Tag, ArrowRight, RefreshCw, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
-import { partsInventory, PartItem, allBrands } from "@/app/lib/inventory";
+import { partsInventory, PartItem, allBrands, isBrandMatch } from "@/app/lib/inventory";
 import PartsRequestModal from "./PartsRequestModal";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function InventorySection({ initialBrand = "All", showTitle = true, limit }: Props) {
+  const [items, setItems] = useState<PartItem[]>(partsInventory);
   const [search, setSearch] = useState("");
   const [selectedBrand, setSelectedBrand] = useState(initialBrand);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -22,18 +24,28 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
   const [modalOpen, setModalOpen] = useState(false);
   const [activePart, setActivePart] = useState<PartItem | null>(null);
 
+  useEffect(() => {
+    fetch("/api/prado/products")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && Array.isArray(data.parts) && data.parts.length > 0) {
+          setItems(data.parts);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const categories = useMemo(() => {
     const set = new Set<string>();
-    partsInventory.forEach((p) => {
+    items.forEach((p) => {
       if (p.category) set.add(p.category);
     });
     return ["All", ...Array.from(set)];
-  }, []);
+  }, [items]);
 
   const filteredParts = useMemo(() => {
-    return partsInventory.filter((item) => {
-      const matchBrand =
-        selectedBrand === "All" || item.brand.toLowerCase() === selectedBrand.toLowerCase();
+    return items.filter((item) => {
+      const matchBrand = isBrandMatch(item.brand, selectedBrand);
       const matchCategory =
         selectedCategory === "All" || item.category === selectedCategory;
       const matchSearch =
@@ -44,7 +56,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
 
       return matchBrand && matchCategory && matchSearch;
     });
-  }, [selectedBrand, selectedCategory, search]);
+  }, [items, selectedBrand, selectedCategory, search]);
 
   const totalPages = Math.ceil(filteredParts.length / itemsPerPage);
   const displayedParts = useMemo(() => {
@@ -106,7 +118,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
                   : "bg-[#141822] text-gray-400 border-gray-800 hover:text-white"
               }`}
             >
-              All Brands ({partsInventory.length})
+              All Brands ({items.length})
             </button>
             {allBrands.map((b) => (
               <button
@@ -154,7 +166,21 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
       {/* Results Header */}
       <div className="flex items-center justify-between mb-6">
         <p className="text-xs sm:text-sm font-semibold text-gray-400">
-          Showing <span className="text-white font-bold">{filteredParts.length}</span> parts found
+          {limit ? (
+            <>
+              Showing <span className="text-white font-bold">{displayedParts.length}</span> of{" "}
+              <span className="text-white font-bold">{filteredParts.length}</span> featured parts
+            </>
+          ) : (
+            <>
+              Showing{" "}
+              <span className="text-white font-bold">
+                {filteredParts.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}–
+                {Math.min(currentPage * itemsPerPage, filteredParts.length)}
+              </span>{" "}
+              of <span className="text-white font-bold">{filteredParts.length}</span> parts found
+            </>
+          )}
         </p>
 
         {(selectedBrand !== "All" || selectedCategory !== "All" || search) && (
@@ -207,6 +233,21 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
                   <span className="text-[10px] font-semibold text-emerald-400 flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" /> In Stock
                   </span>
+                </div>
+
+                {/* Product Featured Image (Square Aspect Ratio & Edge-to-Edge Cover) */}
+                <div className="relative aspect-square w-full bg-[#0b0d10] rounded-xl overflow-hidden mb-3 border border-gray-800 flex items-center justify-center">
+                  {item.imageUrl ? (
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      fill
+                      unoptimized={item.imageUrl.startsWith("http")}
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <Wrench className="w-8 h-8 text-gray-700" />
+                  )}
                 </div>
 
                 {/* Part Name */}
