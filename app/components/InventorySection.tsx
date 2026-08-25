@@ -64,13 +64,13 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
             <Wrench className="w-3.5 h-3.5" />
-            <span>Inventario de Repuestos Originales y Alternativos</span>
+            <span>Genuine & Aftermarket Replacement Parts</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
-            Catálogo de <span className="text-[#f87f21]">Repuestos Pesados</span>
+            Heavy Equipment <span className="text-[#f87f21]">Parts Catalog</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-400">
-            Explora más de 170+ repuestos para tractores y maquinaria de construcción disponibles en nuestro depósito de Valle de Sula #2. Envíos directos a todo Honduras.
+            Explore over 170+ tractor and construction machinery replacement parts available at our depot. Fast regional delivery & direct shipping.
           </p>
         </div>
       )}
@@ -88,7 +88,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
                 setSearch(e.target.value);
                 setCurrentPage(1);
               }}
-              placeholder="Buscar por repuesto, SKU, marca..."
+              placeholder="Search by part name, SKU, brand..."
               className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#12151c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
             />
           </div>
@@ -106,7 +106,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
                   : "bg-[#141822] text-gray-400 border-gray-800 hover:text-white"
               }`}
             >
-              Todas las Marcas ({partsInventory.length})
+              All Brands ({partsInventory.length})
             </button>
             {allBrands.map((b) => (
               <button
@@ -130,7 +130,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
         {/* Category Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pt-2 border-t border-gray-800/80 scrollbar-none">
           <span className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-            <Filter className="w-3.5 h-3.5 text-[#f87f21]" /> Categoría:
+            <Filter className="w-3.5 h-3.5 text-[#f87f21]" /> Category:
           </span>
           {categories.map((cat) => (
             <button
@@ -145,7 +145,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
                   : "text-gray-400 hover:text-white hover:bg-gray-800/50"
               }`}
             >
-              {cat === "All" ? "Todas" : cat}
+              {cat === "All" ? "All" : cat}
             </button>
           ))}
         </div>
@@ -154,7 +154,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
       {/* Results Header */}
       <div className="flex items-center justify-between mb-6">
         <p className="text-xs sm:text-sm font-semibold text-gray-400">
-          Mostrando <span className="text-white font-bold">{filteredParts.length}</span> repuestos encontrados
+          Showing <span className="text-white font-bold">{filteredParts.length}</span> parts found
         </p>
 
         {(selectedBrand !== "All" || selectedCategory !== "All" || search) && (
@@ -167,7 +167,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
             }}
             className="text-xs text-[#f87f21] hover:underline flex items-center gap-1 font-bold"
           >
-            <RefreshCw className="w-3 h-3" /> Limpiar Filtros
+            <RefreshCw className="w-3 h-3" /> Clear Filters
           </button>
         )}
       </div>
@@ -176,9 +176,9 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
       {displayedParts.length === 0 ? (
         <div className="py-16 text-center glass-panel rounded-2xl border border-gray-800">
           <Wrench className="w-12 h-12 text-gray-600 mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-white">No se encontraron repuestos</h3>
+          <h3 className="text-lg font-bold text-white">No parts found</h3>
           <p className="text-sm text-gray-400 max-w-md mx-auto mt-1">
-            No encontramos coincidencias para &quot;{search}&quot;. Contáctanos directamente y realizamos la búsqueda o importación por ti.
+            We couldn&apos;t find any matches for &quot;{search}&quot;. Contact us directly and we will locate or import it for you.
           </p>
           <button
             onClick={() => {
@@ -188,7 +188,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
             }}
             className="mt-4 px-5 py-2 rounded-xl bg-[#f87f21] text-white text-xs font-bold"
           >
-            Ver Todos los Repuestos
+            View All Parts
           </button>
         </div>
       ) : (
@@ -205,7 +205,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
                     {item.brand}
                   </span>
                   <span className="text-[10px] font-semibold text-emerald-400 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" /> Disponible
+                    <CheckCircle2 className="w-3 h-3" /> In Stock
                   </span>
                 </div>
 
@@ -229,14 +229,14 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
               {/* Action & Price Quote */}
               <div className="pt-4 border-t border-gray-800/80 flex items-center justify-between gap-2">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-400 block">Cotización</span>
-                  <span className="text-sm font-bold text-[#f87f21]">Consultar Precio</span>
+                  <span className="text-[10px] uppercase font-bold text-gray-400 block">Pricing</span>
+                  <span className="text-sm font-bold text-[#f87f21]">Inquire Price</span>
                 </div>
                 <button
                   onClick={() => handleOpenQuote(item)}
                   className="px-3.5 py-2 rounded-xl bg-[#f87f21] text-white text-xs font-bold hover:bg-[#df680d] transition-all flex items-center gap-1.5 shadow-md shadow-[#f87f21]/20"
                 >
-                  <span>Cotizar</span>
+                  <span>Get Quote</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -256,7 +256,7 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
             <ChevronLeft className="w-5 h-5" />
           </button>
           <span className="text-xs font-bold text-gray-300">
-            Página <span className="text-[#f87f21]">{currentPage}</span> de {totalPages}
+            Page <span className="text-[#f87f21]">{currentPage}</span> of {totalPages}
           </span>
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}

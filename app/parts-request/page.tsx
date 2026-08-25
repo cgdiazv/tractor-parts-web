@@ -13,34 +13,34 @@ export default function PartsRequestPage() {
 
   const brandGuides: Record<string, { title: string; desc: string; popularParts: string[] }> = {
     CAT: {
-      title: "Solicitud de Repuestos Caterpillar (CAT)",
-      desc: "Repuestos genuinos y OEM para cargadores frontales 988G, 966G, 966H, excavadoras 349D, tractores de oruga D6G y motores CAT.",
-      popularParts: ["DRIVE GP-SWING", "DRIVE GP-CIRCLE", "DIESEL INJECTORS", "FINAL DRIVE GP", "FILTROS CAT"],
+      title: "Caterpillar (CAT) Parts Quote",
+      desc: "Genuine & OEM replacement parts for 988G, 966G, 966H wheel loaders, 349D excavators, D6G track-type tractors, and CAT diesel engines.",
+      popularParts: ["DRIVE GP-SWING", "DRIVE GP-CIRCLE", "DIESEL INJECTORS", "FINAL DRIVE GP", "CAT FILTERS"],
     },
     Cummins: {
-      title: "Solicitud de Repuestos Cummins",
-      desc: "Componentes originales y de reemplazo para motores diésel Cummins QSC, ISX, N14, 6BT, 4BT e inyectores de alta presión.",
-      popularParts: ["FUEL FILTER", "FUEL INJECTOR VALVE", "TURBOCHARGER ASSY", "SENSORES DE PRESIÓN", "KIT DE EMPAQUES"],
+      title: "Cummins Engine Parts Quote",
+      desc: "Genuine and aftermarket components for Cummins QSC, ISX, N14, 6BT, 4BT diesel engines and high-pressure fuel injectors.",
+      popularParts: ["FUEL FILTER", "FUEL INJECTOR VALVE", "TURBOCHARGER ASSY", "PRESSURE SENSORS", "GASKET KIT"],
     },
     Komatsu: {
-      title: "Solicitud de Repuestos Komatsu",
-      desc: "Repuestos de rodaje y motor para excavadoras y tractores Komatsu PC200, PC300, D65, D85, D155.",
+      title: "Komatsu Heavy Equipment Parts Quote",
+      desc: "Undercarriage and engine parts for Komatsu excavators and dozers PC200, PC300, D65, D85, D155.",
       popularParts: ["IDLER AS", "TURBOCHARGER ASSEMBLY", "IDLER-TRACK", "PISTON ASS'Y", "TRACK LINK ASSEMBLY"],
     },
     Volvo: {
-      title: "Solicitud de Repuestos Volvo Construction",
-      desc: "Repuestos para cargadores de ruedas Volvo L220E, L350H, excavadoras EC210, EC290 y motores diésel Volvo D12.",
-      popularParts: ["SPARE PART PRESSURE SWITCH", "BALL BEARING CH A2EB", "KITS DE SELLOS", "VALVULAS DE CONTROL"],
+      title: "Volvo Construction Parts Quote",
+      desc: "Parts for Volvo L220E, L350H wheel loaders, EC210, EC290 excavators, and Volvo D12 engines.",
+      popularParts: ["SPARE PART PRESSURE SWITCH", "BALL BEARING CH A2EB", "SEAL KITS", "CONTROL VALVES"],
     },
     "John Deere": {
-      title: "Solicitud de Repuestos John Deere Heavy",
-      desc: "Piezas para maquinaria agrícola y de construcción John Deere, transmisiones, bombas hidráulicas y rodaje.",
-      popularParts: ["FILTROS DE ACEITE Y COMBUSTIBLE", "BOMBAS HIDRÁULICAS", "BOMBAS DE AGUA", "RODAMIENTOS"],
+      title: "John Deere Heavy Equipment Parts Quote",
+      desc: "Components for John Deere construction & agricultural machinery, transmissions, hydraulic pumps, and undercarriages.",
+      popularParts: ["OIL & FUEL FILTERS", "HYDRAULIC PUMPS", "WATER PUMPS", "BEARINGS"],
     },
     "Case IH": {
-      title: "Solicitud de Repuestos Case IH & Construction",
-      desc: "Componentes para equipos de construcción Case 580, tractores Magnum, excavadoras y retroexcavadoras.",
-      popularParts: ["RETENES Y SELLOS", "INYECTORES DIÉSEL", "BOMBAS DE INYECCIÓN", "DISCOS DE FRENO"],
+      title: "Case IH & Construction Equipment Parts Quote",
+      desc: "Components for Case 580 backhoes, Magnum tractors, excavators, and heavy machinery.",
+      popularParts: ["SEALS & GASKETS", "DIESEL INJECTORS", "INJECTION PUMPS", "BRAKE DISCS"],
     },
   };
 
@@ -55,13 +55,13 @@ export default function PartsRequestPage() {
         <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
             <FileText className="w-3.5 h-3.5" />
-            <span>Formulario Oficial de Cotización</span>
+            <span>Official Quote Request Form</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-            Solicitud de Repuestos por <span className="text-[#f87f21]">Marca de Maquinaria</span>
+            Request Replacement Parts by <span className="text-[#f87f21]">Machinery Brand</span>
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-            Ingresa los detalles de tu equipo (Caterpillar, Cummins, Komatsu, Volvo, John Deere o Case IH) y nuestro departamento de repuestos en Valle de Sula #2 verificará la pieza exacta mediante el catálogo OEM.
+            Enter your equipment details (Caterpillar, Cummins, Komatsu, Volvo, John Deere, or Case IH) and our technical team will verify the exact part using OEM catalogs.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function PartsRequestPage() {
               }`}
             >
               <div className="text-sm font-black uppercase">{b.name}</div>
-              <div className="text-[10px] opacity-80 mt-0.5">Cotizar Piezas</div>
+              <div className="text-[10px] opacity-80 mt-0.5 uppercase tracking-wider font-semibold">Quote Parts</div>
             </button>
           ))}
         </div>
@@ -88,7 +88,7 @@ export default function PartsRequestPage() {
           <div className="lg:col-span-8 glass-panel p-8 rounded-3xl border border-gray-800 space-y-6">
             <div>
               <span className="text-xs font-bold text-[#f87f21] uppercase tracking-wider block mb-1">
-                Especialidad Técnica {selectedBrand}
+                Technical Specialty - {selectedBrand}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-white">{currentGuide.title}</h2>
               <p className="text-xs sm:text-sm text-gray-400 mt-2 leading-relaxed">{currentGuide.desc}</p>
@@ -96,7 +96,7 @@ export default function PartsRequestPage() {
 
             <div className="border-t border-gray-800 pt-5 space-y-3">
               <h3 className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                Repuestos Populares en Stock para {selectedBrand}:
+                Popular Stocked Parts for {selectedBrand}:
               </h3>
               <div className="flex flex-wrap gap-2">
                 {currentGuide.popularParts.map((part, i) => (
@@ -116,7 +116,7 @@ export default function PartsRequestPage() {
                 className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#f87f21] to-[#df680d] text-white font-black text-sm uppercase tracking-wider shadow-xl shadow-[#f87f21]/20 hover:scale-[1.01] transition-transform flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
-                <span>Abrir Formulario de Cotización para {selectedBrand}</span>
+                <span>Open Quote Request Form for {selectedBrand}</span>
               </button>
             </div>
           </div>
@@ -127,29 +127,29 @@ export default function PartsRequestPage() {
               <div className="w-10 h-10 rounded-xl bg-[#f87f21]/20 text-[#f87f21] flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-white uppercase">¿Por qué Cotizar con Nosotros?</h3>
+              <h3 className="text-base font-bold text-white uppercase">Why Request a Quote With Us?</h3>
               <ul className="space-y-2.5 text-xs text-gray-300">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Verificación por número de serie de chasis/motor</span>
+                  <span>Verification by chassis / engine serial number</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Despacho inmediato desde almacén Valle de Sula #2</span>
+                  <span>Immediate dispatch from our depot</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Importaciones semanales directas de fábrica</span>
+                  <span>Weekly direct factory imports</span>
                 </li>
               </ul>
             </div>
 
             <div className="glass-panel p-6 rounded-3xl border border-gray-800 space-y-3">
               <div className="flex items-center gap-2 text-xs font-bold text-[#f87f21] uppercase">
-                <PhoneCall className="w-4 h-4" /> Asistencia Telefónica
+                <PhoneCall className="w-4 h-4" /> Phone Assistance
               </div>
               <p className="text-xs text-gray-400">
-                Si prefieres atención por llamada o WhatsApp, comunícate directamente con ventas:
+                If you prefer support via phone call or email, contact sales directly:
               </p>
               <a
                 href={`tel:${storeInfo.phone.split("/")[0].trim()}`}

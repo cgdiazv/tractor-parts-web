@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { X, Send, ShieldCheck, CheckCircle2, AlertCircle, Wrench, PackageCheck } from "lucide-react";
 import { allBrands } from "@/app/lib/inventory";
 
@@ -61,15 +62,19 @@ export default function PartsRequestModal({
         {/* Header */}
         <div className="bg-[#1a1f2c] border-b border-gray-800 p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#f87f21]/20 border border-[#f87f21]/40 flex items-center justify-center text-[#f87f21]">
-              <Wrench className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white uppercase tracking-tight">
-                Solicitud de Cotización de Repuestos
+            <Image
+              src="/logo.webp"
+              alt="Tractor Parts Depot Logo"
+              width={160}
+              height={45}
+              className="h-9 w-auto object-contain"
+            />
+            <div className="border-l border-gray-700/80 pl-3">
+              <h3 className="text-base font-bold text-white uppercase tracking-tight">
+                Quote Request
               </h3>
-              <p className="text-xs text-gray-400">
-                Tractor Parts Depot • Valle de Sula #2, San Pedro Sula
+              <p className="text-[11px] text-gray-400">
+                Direct Technical Assistance
               </p>
             </div>
           </div>
@@ -88,16 +93,16 @@ export default function PartsRequestModal({
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h4 className="text-2xl font-black text-white">¡Solicitud Enviada con Éxito!</h4>
+              <h4 className="text-2xl font-black text-white">Request Sent Successfully!</h4>
               <p className="text-sm text-gray-300 max-w-md mx-auto">
-                Hemos recibido tu requerimiento de repuesto <span className="text-[#f87f21] font-bold">{partName || "solicitado"}</span>. Nuestro equipo técnico en Valle de Sula se pondrá en contacto contigo en breve con la disponibilidad y mejor precio.
+                We have received your inquiry for part <span className="text-[#f87f21] font-bold">{partName || "requested"}</span>. Our technical team will contact you shortly with availability and pricing.
               </p>
               <div className="pt-4">
                 <button
                   onClick={resetAndClose}
                   className="px-6 py-2.5 rounded-xl bg-[#f87f21] text-white font-bold text-sm hover:bg-[#df680d] transition-colors"
                 >
-                  Cerrar Ventana
+                  Close Window
                 </button>
               </div>
             </div>
@@ -106,7 +111,7 @@ export default function PartsRequestModal({
               {/* Brand Selector */}
               <div>
                 <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-                  Marca de la Maquinaria / Repuesto *
+                  Machinery / Part Brand *
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {allBrands.map((b) => (
@@ -130,26 +135,26 @@ export default function PartsRequestModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Nombre o Descripción del Repuesto *
+                    Part Name or Description *
                   </label>
                   <input
                     type="text"
                     required
                     value={partName}
                     onChange={(e) => setPartName(e.target.value)}
-                    placeholder="Ej. Inyector Diésel, Filtro de Combustible, Mandos Finales..."
+                    placeholder="e.g. Diesel Injector, Fuel Filter, Final Drive..."
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Número de Parte / SKU (Si se conoce)
+                    Part Number / SKU (If known)
                   </label>
                   <input
                     type="text"
                     value={sku}
                     onChange={(e) => setSku(e.target.value)}
-                    placeholder="Ej. 1W9A1F5 / TPD-CAT-1004"
+                    placeholder="e.g. 1W9A1F5 / TPD-CAT-1004"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                   />
                 </div>
@@ -159,31 +164,31 @@ export default function PartsRequestModal({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Modelo de Máquina
+                    Machine Model
                   </label>
                   <input
                     type="text"
                     value={machineModel}
                     onChange={(e) => setMachineModel(e.target.value)}
-                    placeholder="Ej. CAT 349D / Volvo L220E"
+                    placeholder="e.g. CAT 349D / Volvo L220E"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Serie de Chasis / Motor
+                    Chassis / Engine Serial No.
                   </label>
                   <input
                     type="text"
                     value={serialNumber}
                     onChange={(e) => setSerialNumber(e.target.value)}
-                    placeholder="Número de serie"
+                    placeholder="Serial number"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Cantidad Requerida
+                    Quantity Required
                   </label>
                   <input
                     type="number"
@@ -199,23 +204,23 @@ export default function PartsRequestModal({
               <div className="border-t border-gray-800/80 pt-4 space-y-4">
                 <h4 className="text-xs font-bold text-[#f87f21] uppercase tracking-wider flex items-center gap-1.5">
                   <PackageCheck className="w-4 h-4" />
-                  Datos de Contacto del Cliente
+                  Customer Contact Information
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 mb-1">Nombre Completo *</label>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Full Name / Company *</label>
                     <input
                       type="text"
                       required
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
-                      placeholder="Tu nombre o Empresa"
+                      placeholder="Your name or company"
                       className="w-full px-3 py-2 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 mb-1">Teléfono / WhatsApp *</label>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Phone / WhatsApp *</label>
                     <input
                       type="tel"
                       required
@@ -226,25 +231,25 @@ export default function PartsRequestModal({
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 mb-1">Correo Electrónico *</label>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Email Address *</label>
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="ejemplo@correo.com"
+                      placeholder="example@company.com"
                       className="w-full px-3 py-2 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-300 mb-1">Notas Adicionales</label>
+                  <label className="block text-xs font-semibold text-gray-300 mb-1">Additional Notes</label>
                   <textarea
                     rows={2}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Detalles sobre entrega, urgencia o especificaciones de la pieza..."
+                    placeholder="Details about delivery location, urgency, or specs..."
                     className="w-full px-3 py-2 rounded-xl bg-[#1a1f2c] border border-gray-800 text-white text-sm focus:outline-none focus:border-[#f87f21]"
                   />
                 </div>
@@ -254,7 +259,7 @@ export default function PartsRequestModal({
               <div className="pt-3 flex items-center justify-between border-t border-gray-800">
                 <div className="flex items-center gap-1.5 text-xs text-gray-400">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Importación Garantizada • Valle de Sula #2</span>
+                  <span>Guaranteed Import & Technical Support</span>
                 </div>
                 <button
                   type="submit"
@@ -262,11 +267,11 @@ export default function PartsRequestModal({
                   className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#f87f21] to-[#d9650b] text-white font-bold text-sm shadow-lg shadow-[#f87f21]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-50"
                 >
                   {loading ? (
-                    <span>Procesando...</span>
+                    <span>Processing...</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Enviar Cotización</span>
+                      <span>Submit Quote Request</span>
                     </>
                   )}
                 </button>

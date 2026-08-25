@@ -13,15 +13,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tractor Parts Depot | Repuestos de Maquinaria Pesada & Tractores",
-  description: "Importación directa de repuestos y maquinaria pesada para construcción y minería en Valle de Sula #2, San Pedro Sula, Honduras. Caterpillar, Cummins, Komatsu, Volvo, John Deere.",
-  keywords: ["Tractor Parts Depot", "Tracto Repuestos", "repuestos maquinaria pesada", "honduras", "san pedro sula", "valle de sula", "caterpillar", "cummins", "komatsu", "volvo", "john deere", "case ih", "inyectores", "filtros", "mandos finales", "rodaje"],
+  title: "Tractor Parts Depot | Heavy Machinery & Tractor Parts",
+  description: "Direct import of heavy machinery replacement parts for construction and mining at Valle de Sula #2, San Pedro Sula. Caterpillar, Cummins, Komatsu, Volvo, John Deere.",
+  keywords: ["Tractor Parts Depot", "tractor parts", "heavy equipment parts", "san pedro sula", "valle de sula", "caterpillar", "cummins", "komatsu", "volvo", "john deere", "case ih", "injectors", "filters", "final drives", "undercarriage"],
+  icons: {
+    icon: "/logo.webp",
+    apple: "/logo.webp",
+  },
+  openGraph: {
+    title: "Tractor Parts Depot | Heavy Equipment Parts Supplier",
+    description: "Direct sales & import of engine parts, undercarriage components, and final drives.",
+    images: [{ url: "/logo.webp" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="es"
+      lang="en"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >

@@ -2,132 +2,162 @@
 
 import React from "react";
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock, Wrench, ShieldCheck, ArrowUpRight } from "lucide-react";
-import { storeInfo, allBrands } from "@/app/lib/inventory";
+import Image from "next/image";
+import { MapPin, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#080a0e] text-gray-400 border-t border-gray-800/80 pt-16 pb-8 px-4 sm:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-        {/* Col 1: About & Depot Branding */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#f87f21] flex items-center justify-center text-white shadow-lg shadow-[#f87f21]/20">
-              <Wrench className="w-5 h-5 stroke-[2.2]" />
-            </div>
-            <div>
-              <h3 className="text-lg font-black text-white uppercase tracking-tight">
-                TRACTOR <span className="text-[#f87f21]">PARTS</span> DEPOT
-              </h3>
-              <span className="text-[10px] font-bold text-gray-400 block uppercase">
-                Valle de Sula #2 • Honduras
-              </span>
-            </div>
-          </div>
-
-          <p className="text-xs leading-relaxed text-gray-400">
-            {storeInfo.tagline}. Especialistas en repuestos de motor, mandos finales, rodaje, filtros e inyectores para excavadoras, cargadores y tractores.
-          </p>
-
-          <div className="pt-2 flex items-center gap-2 text-xs font-semibold text-emerald-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Garantía de Calidad e Importación Directa</span>
-          </div>
+    <footer className="bg-[#080a0e] text-gray-300 border-t border-gray-800/80 pt-12 pb-8 px-4 sm:px-8 font-sans">
+      <div className="max-w-7xl mx-auto space-y-10">
+        {/* Top Logo Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-gray-800/80">
+          <Link href="/" className="inline-block group">
+            <Image
+              src="/logo.webp"
+              alt="Tractor Parts Depot Logo"
+              width={220}
+              height={60}
+              className="h-11 sm:h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
+            />
+          </Link>
+          <span className="text-xs font-semibold text-gray-400 max-w-md">
+            Direct Import of Replacement Parts & Heavy Machinery for Construction & Mining.
+          </span>
         </div>
 
-        {/* Col 2: Operating Hours & Location */}
-        <div className="space-y-3">
-          <h4 className="text-sm font-bold text-white uppercase tracking-wider text-[#f87f21]">
-            Ubicación y Horarios
-          </h4>
-
-          <div className="space-y-2 text-xs">
-            <div className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-[#f87f21] shrink-0 mt-0.5" />
-              <span>{storeInfo.location}</span>
+        {/* 4 Column Footer Content matching design */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
+          {/* Col 1: Valle de Sula #2 */}
+          <div className="lg:col-span-3 space-y-3">
+            <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
+              VALLE DE SULA #2
+            </h3>
+            <div className="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
+              <p>27 cll. 19 ave</p>
+              <p>Valle de Sula #2, CR 21101</p>
             </div>
-            <p className="text-[11px] text-gray-500 pl-6">
-              Coexistencia operativa en San Pedro Sula, Choloma, Chamelecón, Guanacaste y La Lima.
-            </p>
-          </div>
-
-          <div className="pt-2 space-y-1.5 border-t border-gray-800 text-xs">
-            <div className="flex items-center gap-2 text-gray-300 font-bold">
-              <Clock className="w-3.5 h-3.5 text-[#f87f21]" />
-              <span>Horarios de Atención:</span>
-            </div>
-            {storeInfo.hours.map((h, i) => (
-              <div key={i} className="flex justify-between text-[11px] text-gray-400">
-                <span>{h.days}:</span>
-                <span className="text-white font-medium">{h.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Col 3: Supported Heavy Equipment Brands */}
-        <div className="space-y-3">
-          <h4 className="text-sm font-bold text-white uppercase tracking-wider text-[#f87f21]">
-            Marcas Soportadas
-          </h4>
-
-          <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
-            {allBrands.map((b) => (
-              <Link
-                key={b.code}
-                href={`/inventory?brand=${b.code}`}
-                className="p-2 rounded-lg bg-[#11141c] hover:bg-[#f87f21]/20 hover:text-[#f87f21] border border-gray-800 transition-colors flex items-center justify-between group"
+            <div className="pt-1 flex items-center gap-2">
+              <svg className="w-4 h-4 text-[#f87f21] shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              </svg>
+              <a
+                href="https://wa.me/50499911407"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#f87f21] font-bold text-sm sm:text-base hover:underline"
               >
-                <span>{b.name}</span>
-                <ArrowUpRight className="w-3 h-3 text-gray-600 group-hover:text-[#f87f21]" />
-              </Link>
-            ))}
+                504.9991.1407
+              </a>
+            </div>
+            <div className="pt-2">
+              <a
+                href="https://maps.google.com/?q=Valle+de+Sula+2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5 hover:text-[#f87f21] transition-colors"
+              >
+                <MapPin className="w-3.5 h-3.5 text-white" />
+                <span>GET DIRECTIONS</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Col 2: Orlando */}
+          <div className="lg:col-span-3 space-y-3">
+            <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
+              ORLANDO
+            </h3>
+            <div className="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
+              <p>7450 E Irlo Bronson Memorial Hwy, St Cloude</p>
+              <p>FL 34771</p>
+            </div>
+            <div className="pt-1 flex items-center gap-2">
+              <svg className="w-4 h-4 text-[#f87f21] shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              </svg>
+              <a
+                href="https://wa.me/13466257229"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#f87f21] font-bold text-sm sm:text-base hover:underline"
+              >
+                346.625.7229
+              </a>
+            </div>
+            <div className="pt-2">
+              <a
+                href="https://maps.google.com/?q=7450+E+Irlo+Bronson+Memorial+Hwy+St+Cloud+FL+34771"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5 hover:text-[#f87f21] transition-colors"
+              >
+                <MapPin className="w-3.5 h-3.5 text-white" />
+                <span>GET DIRECTIONS</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Col 3: Hours & Email */}
+          <div className="lg:col-span-3 space-y-3">
+            <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
+              HOURS
+            </h3>
+            <div className="text-xs sm:text-sm text-gray-300 space-y-1 font-medium">
+              <p>Mon - Fri &nbsp; 8:00 AM - 5:00 PM</p>
+              <p>Sat - Sun &nbsp; Closed</p>
+            </div>
+            <div className="pt-3 flex items-center gap-2">
+              <Mail className="w-4 h-4 text-[#f87f21] shrink-0" />
+              <a
+                href="mailto:info@tractorpartsdepot.us"
+                className="text-xs sm:text-sm font-semibold text-white hover:text-[#f87f21] transition-colors"
+              >
+                info@tractorpartsdepot.us
+              </a>
+            </div>
+          </div>
+
+          {/* Col 4: Quick Links (Separated by vertical line on desktop) */}
+          <div className="lg:col-span-3 space-y-3 lg:border-l lg:border-gray-800 lg:pl-8">
+            <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
+              QUICK LINKS
+            </h3>
+            <ul className="space-y-2 text-xs sm:text-sm font-semibold text-gray-300">
+              <li>
+                <Link href="/inventory" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#f87f21] font-bold">+</span> Inventory
+                </Link>
+              </li>
+              <li>
+                <Link href="/parts-request" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#f87f21] font-bold">+</span> Parts Department
+                </Link>
+              </li>
+              <li>
+                <Link href="/equipment" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#f87f21] font-bold">+</span> Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/parts-request" className="hover:text-[#f87f21] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#f87f21] font-bold">+</span> Contact Us
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Col 4: Contact & Direct Quote Links */}
-        <div className="space-y-4">
-          <h4 className="text-sm font-bold text-white uppercase tracking-wider text-[#f87f21]">
-            Atención al Cliente
-          </h4>
-
-          <div className="space-y-3 text-xs">
-            <a
-              href={`tel:${storeInfo.phone.split("/")[0].trim()}`}
-              className="flex items-center gap-3 p-3 rounded-xl bg-[#141824] border border-gray-800 hover:border-[#f87f21] transition-colors group"
-            >
-              <Phone className="w-4 h-4 text-[#f87f21]" />
-              <div>
-                <span className="text-[10px] text-gray-400 block uppercase">Ventas Directas</span>
-                <span className="text-white font-bold text-sm group-hover:text-[#f87f21]">
-                  {storeInfo.phone.split("/")[0].trim()}
-                </span>
-              </div>
-            </a>
-
-            <a
-              href={`mailto:${storeInfo.email}`}
-              className="flex items-center gap-3 p-3 rounded-xl bg-[#141824] border border-gray-800 hover:border-[#f87f21] transition-colors group"
-            >
-              <Mail className="w-4 h-4 text-[#f87f21]" />
-              <div>
-                <span className="text-[10px] text-gray-400 block uppercase">Correo Electrónico</span>
-                <span className="text-white font-bold text-xs group-hover:text-[#f87f21]">
-                  {storeInfo.email}
-                </span>
-              </div>
-            </a>
+        {/* Sub-footer */}
+        <div className="pt-6 border-t border-gray-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+          <p>© {new Date().getFullYear()} Tractor Parts Depot. All rights reserved.</p>
+          <div className="flex items-center gap-6 font-bold text-[11px] uppercase">
+            <Link href="#" className="hover:text-gray-300 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="#" className="hover:text-gray-300 transition-colors">
+              Terms & Conditions
+            </Link>
           </div>
-        </div>
-      </div>
-
-      {/* Sub-footer */}
-      <div className="max-w-7xl mx-auto pt-6 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-        <p>© {new Date().getFullYear()} Tractor Parts Depot • Tracto Repuestos Valle de Sula. Todos los derechos reservados.</p>
-        <div className="flex items-center gap-6">
-          <Link href="/inventory" className="hover:text-gray-300">Catálogo</Link>
-          <Link href="/equipment" className="hover:text-gray-300">Maquinaria</Link>
-          <Link href="/parts-request" className="hover:text-gray-300">Cotización</Link>
         </div>
       </div>
     </footer>

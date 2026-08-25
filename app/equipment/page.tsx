@@ -31,20 +31,20 @@ export default function EquipmentPage() {
         <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
             <Truck className="w-3.5 h-3.5" />
-            <span>Maquinaria Pesada Usada e Inspeccionada</span>
+            <span>Inspected Pre-Owned Heavy Equipment</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-            Cargadores, Excavadoras y <span className="text-[#f87f21]">Tractores</span>
+            Wheel Loaders, Excavators & <span className="text-[#f87f21]">Tractors</span>
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-            Equipos listos para trabajar en minería, construcción y movimiento de tierras. Todos los equipos han sido inspeccionados técnicamente por nuestros especialistas en Valle de Sula.
+            Work-ready equipment for mining, construction, and earthmoving. All machinery has been technically inspected by our specialists at our depot.
           </p>
         </div>
 
         {/* Filter Bar */}
         <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
           <span className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#f87f21]" /> Marca:
+            <SlidersHorizontal className="w-3.5 h-3.5 text-[#f87f21]" /> Brand:
           </span>
           {["All", "CAT", "Volvo", "Atlas Copco"].map((b) => (
             <button
@@ -56,7 +56,7 @@ export default function EquipmentPage() {
                   : "glass-panel text-gray-300 border-gray-800 hover:border-gray-700"
               }`}
             >
-              {b === "All" ? "Todos los Equipos" : b}
+              {b === "All" ? "All Equipment" : b}
             </button>
           ))}
         </div>
@@ -96,7 +96,7 @@ export default function EquipmentPage() {
                   {/* Specifications Table */}
                   <div className="border-t border-gray-800 pt-4 space-y-2">
                     <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                      Especificaciones Técnicas:
+                      Technical Specifications:
                     </h3>
                     <div className="grid grid-cols-2 gap-2 text-xs">
                       {Object.entries(item.specs).map(([key, val]) => (
@@ -112,14 +112,14 @@ export default function EquipmentPage() {
 
               <div className="p-6 border-t border-gray-800 flex items-center justify-between bg-[#12151f]/50">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500 block">Precio Estimado</span>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 block">Estimated Price</span>
                   <span className="text-base font-black text-[#f87f21]">{item.price}</span>
                 </div>
                 <button
                   onClick={() => handleInquire(item)}
                   className="px-5 py-2.5 rounded-xl bg-[#f87f21] text-white text-xs font-bold hover:bg-[#df680d] transition-colors flex items-center gap-2 shadow-lg shadow-[#f87f21]/20"
                 >
-                  <span>Solicitar Información</span>
+                  <span>Inquire Details</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -138,7 +138,7 @@ export default function EquipmentPage() {
             setActiveItem(null);
           }}
           initialBrand={activeItem.brand}
-          initialPartName={`Cotización de Maquinaria: ${activeItem.title}`}
+          initialPartName={`Machinery Inquiry: ${activeItem.title}`}
         />
       )}
     </div>
