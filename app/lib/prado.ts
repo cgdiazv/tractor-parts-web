@@ -96,7 +96,9 @@ export async function fetchPradoProducts(): Promise<{ parts: PartItem[]; equipme
         name.toLowerCase().includes("excavator") ||
         name.toLowerCase().includes("bulldozer");
 
-      const imageUrl = item.images?.[0] || "/equipment/cat-966h.webp";
+      const imageUrl = (item.images && item.images.length > 0 && item.images[0])
+        ? item.images[0]
+        : "/images/prado-placeholder.jpg";
 
       if (isEquipment) {
         equipment.push({

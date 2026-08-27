@@ -186,10 +186,17 @@ export default function Home() {
                 <div>
                   <div className="relative h-48 w-full bg-black">
                     <Image
-                      src={item.imageUrl || "/equipment/volvo-l350h.webp"}
+                      src={item.imageUrl || "/images/prado-placeholder.jpg"}
                       alt={item.title}
                       fill
                       className="object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target && !target.src.includes("prado-placeholder.jpg")) {
+                          target.srcset = "";
+                          target.src = "/images/prado-placeholder.jpg";
+                        }
+                      }}
                     />
                     <div className="absolute top-3 left-3 bg-[#f87f21] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-md shadow">
                       {item.brand} • {item.year}

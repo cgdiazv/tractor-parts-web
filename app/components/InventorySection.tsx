@@ -226,17 +226,20 @@ export default function InventorySection({ initialBrand = "All", showTitle = tru
               <div>
                 {/* Full-width Edge-to-Edge Product Image */}
                 <div className="relative aspect-square w-full bg-[#0b0d10] overflow-hidden border-b border-gray-800 flex items-center justify-center">
-                  {item.imageUrl ? (
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.name}
-                      fill
-                      unoptimized={item.imageUrl.startsWith("http")}
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <Wrench className="w-8 h-8 text-gray-700" />
-                  )}
+                  <Image
+                    src={item.imageUrl || "/images/prado-placeholder.jpg"}
+                    alt={item.name}
+                    fill
+                    unoptimized={Boolean(item.imageUrl?.startsWith("http"))}
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target && !target.src.includes("prado-placeholder.jpg")) {
+                        target.srcset = "";
+                        target.src = "/images/prado-placeholder.jpg";
+                      }
+                    }}
+                  />
                 </div>
 
                 {/* Padded Content Body */}

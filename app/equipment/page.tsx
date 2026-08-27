@@ -86,10 +86,17 @@ export default function EquipmentPage() {
               <div>
                 <div className="relative h-64 w-full bg-black">
                   <Image
-                    src={item.imageUrl || "/equipment/volvo-l350h.webp"}
+                    src={item.imageUrl || "/images/prado-placeholder.jpg"}
                     alt={item.title}
                     fill
                     className="object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target && !target.src.includes("prado-placeholder.jpg")) {
+                        target.srcset = "";
+                        target.src = "/images/prado-placeholder.jpg";
+                      }
+                    }}
                   />
                   <div className="absolute top-4 left-4 bg-[#f87f21] text-white text-xs font-black uppercase px-3 py-1 rounded-lg shadow-lg">
                     {item.brand} • {item.year}
