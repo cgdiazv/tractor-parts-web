@@ -87,22 +87,6 @@ export default function Home() {
                   <span>{t.hero.requestQuote}</span>
                 </button>
               </div>
-
-              {/* Metrics Counter */}
-              <div className="pt-6 border-t border-gray-800/80 grid grid-cols-3 gap-6 max-w-md text-left">
-                <div>
-                  <span className="text-2xl sm:text-3xl font-black text-white block">170+</span>
-                  <span className="text-xs text-gray-400 uppercase font-semibold">{t.hero.statParts}</span>
-                </div>
-                <div>
-                  <span className="text-2xl sm:text-3xl font-black text-[#f87f21] block">6+</span>
-                  <span className="text-xs text-gray-400 uppercase font-semibold">{t.hero.statBrands}</span>
-                </div>
-                <div>
-                  <span className="text-2xl sm:text-3xl font-black text-white block">USA &amp; FL</span>
-                  <span className="text-xs text-gray-400 uppercase font-semibold">{t.hero.statExporter}</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
