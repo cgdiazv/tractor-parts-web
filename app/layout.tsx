@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tractor Parts Depot | Heavy Machinery & Tractor Parts",
-  description: "Direct import & export of heavy machinery replacement parts for construction and mining in Orlando, FL & USA to Latin America. Caterpillar, Cummins, Komatsu, Volvo, John Deere.",
+  description: "Premier heavy equipment parts supplier in Orlando, FL. Direct USA export of CAT, Komatsu & Cummins spare parts, overhaul kits & undercarriage to Latin America.",
   keywords: [
     "Heavy equipment parts Orlando",
     "Construction equipment parts Orlando FL",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Tractor Parts Depot | Heavy Equipment Parts Supplier Orlando FL",
-    description: "Direct sales & export of engine parts, undercarriage components, and final drives in Orlando, FL & USA.",
+    description: "Premier heavy equipment parts supplier in Orlando, FL. Direct USA export of CAT, Komatsu & Cummins spare parts, overhaul kits & undercarriage to Latin America.",
     images: [{ url: "/logo.webp" }],
   },
 };

@@ -10,6 +10,11 @@ import {
   PhoneCall,
   ArrowRight,
   Package,
+  ChevronDown,
+  Globe,
+  Cog,
+  Layers,
+  HelpCircle,
 } from "lucide-react";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
@@ -22,6 +27,7 @@ export default function Home() {
   const { t, translateCondition } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const handleOpenQuote = (brand = "") => {
     setSelectedBrand(brand);
@@ -276,6 +282,125 @@ export default function Home() {
                 {t.whyChoose.card4Desc}
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* SEO CAPABILITIES & REGIONAL EXPORT PILLARS */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
+              <Globe className="w-3.5 h-3.5" />
+              <span>{t.seoCapabilities.badge}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
+              {t.seoCapabilities.titlePrefix}{" "}
+              <span className="text-[#f87f21]">{t.seoCapabilities.titleHighlight}</span>
+            </h2>
+            <p className="text-sm text-gray-400">
+              {t.seoCapabilities.subtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="glass-panel p-6 rounded-2xl border border-gray-800 space-y-3 hover:border-gray-700 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-[#f87f21] flex items-center justify-center">
+                <Truck className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white uppercase tracking-tight">
+                {t.seoCapabilities.col1Title}
+              </h3>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                {t.seoCapabilities.col1Desc}
+              </p>
+            </div>
+
+            <div className="glass-panel p-6 rounded-2xl border border-gray-800 space-y-3 hover:border-gray-700 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-[#f87f21] flex items-center justify-center">
+                <Layers className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white uppercase tracking-tight">
+                {t.seoCapabilities.col2Title}
+              </h3>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                {t.seoCapabilities.col2Desc}
+              </p>
+            </div>
+
+            <div className="glass-panel p-6 rounded-2xl border border-gray-800 space-y-3 hover:border-gray-700 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-[#f87f21] flex items-center justify-center">
+                <Cog className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white uppercase tracking-tight">
+                {t.seoCapabilities.col3Title}
+              </h3>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                {t.seoCapabilities.col3Desc}
+              </p>
+            </div>
+
+            <div className="glass-panel p-6 rounded-2xl border border-gray-800 space-y-3 hover:border-gray-700 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-[#f87f21] flex items-center justify-center">
+                <Globe className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white uppercase tracking-tight">
+                {t.seoCapabilities.col4Title}
+              </h3>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                {t.seoCapabilities.col4Desc}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FREQUENTLY ASKED QUESTIONS (SEO FAQ ACCORDION) */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full badge-amber text-xs font-bold uppercase tracking-wider">
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>{t.faq.badge}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
+              {t.faq.titlePrefix} <span className="text-[#f87f21]">{t.faq.titleHighlight}</span>
+            </h2>
+            <p className="text-sm text-gray-400">
+              {t.faq.subtitle}
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { q: t.faq.q1, a: t.faq.a1 },
+              { q: t.faq.q2, a: t.faq.a2 },
+              { q: t.faq.q3, a: t.faq.a3 },
+              { q: t.faq.q4, a: t.faq.a4 },
+            ].map((item, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="glass-panel rounded-2xl border border-gray-800/80 overflow-hidden transition-all duration-200"
+                >
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-gray-800/30 transition-colors"
+                  >
+                    <span className="font-bold text-sm sm:text-base text-white">
+                      {item.q}
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-[#f87f21] shrink-0 transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-gray-800/50">
+                      {item.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
 
